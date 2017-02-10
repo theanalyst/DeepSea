@@ -36,13 +36,13 @@ create_mon_fs:
 # TODO: we can put this check in a nice exec. module
 start-mon:
   cmd.run:
-    - name: "systemctl start ceph-mon@{{ grains['host'] }}"
+    - name: "systemctl start ceph-mon@{{ grains['id'] }}"
     - require:
         - cmd: create_mon_fs
 
 enable-mon:
   cmd.run:
-    - name: "systemctl enable ceph-mon@{{ grains['host'] }}"
+    - name: "systemctl enable ceph-mon@{{ grains['id'] }}"
     - require:
         - cmd: create_mon_fs
 
