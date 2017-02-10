@@ -27,8 +27,8 @@ create_mon_dirs:
 
 create_mon_fs:
   cmd.run:
-    - name: ceph-mon --mkfs -i {{ grains['host'] }} --cluster {{ cluster }} --setuser ceph --setgroup ceph --fsid  {{ fsid }} --keyring /var/lib/ceph/tmp/keyring.mon
-    - creates: /var/lib/ceph/mon/{{ cluster }}-{{ grains['host'] }}/keyring
+    - name: ceph-mon --mkfs -i {{ grains['id'] }} --cluster {{ cluster }} --setuser ceph --setgroup ceph --fsid  {{ fsid }} --keyring /var/lib/ceph/tmp/keyring.mon
+    - creates: /var/lib/ceph/mon/{{ cluster }}-{{ grains['id'] }}/keyring
     - require:
         - file: /var/lib/ceph/tmp/keyring.mon
 
