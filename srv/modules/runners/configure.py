@@ -108,7 +108,7 @@ def cluster(**kwargs):
         search = "I@cluster:{} and I@roles:mon".format(name)
 
         mon_host = local.cmd(search , 'pillar.get', [ 'public_address' ], expr_form="compound")
-        mon_initial_members = local.cmd(search , 'grains.get', [ 'host' ], expr_form="compound")
+        mon_initial_members = local.cmd(search , 'grains.get', [ 'id' ], expr_form="compound")
 
         search = "I@cluster:{} and I@roles:mon".format(name)
         #igw_hosts = local.cmd(search , 'pillar.get', [ 'public_address' ], expr_form="compound")
