@@ -307,7 +307,7 @@ install:
 
 
 rpm: tarball
-	rpmbuild -bb deepsea.spec
+	rpmbuild --define '_topdir %{getenv:HOME}/rpmbuild' -bb deepsea.spec
 
 # Removing test dependency until resolved
 tarball: 
