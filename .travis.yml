@@ -4,7 +4,7 @@ python:
 install: pip install tox
 env:
   - TOXENV=py27
-  - TOXENV=pylint
+  - TOXENV=lint
 matrix:
   allow_failures:
     env: TOXENV=lint
