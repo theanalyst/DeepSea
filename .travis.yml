@@ -2,5 +2,11 @@ language: python
 python:
   - "2.7"
 install: pip install tox
-script: tox
+matrix:
+  include:
+  - env: TOXENV=py27
+  allow_failures:
+  - env: TOXENV=pylint
+script:
+  - tox -e $TOXENV
 cache: pip
