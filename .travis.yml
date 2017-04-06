@@ -7,13 +7,13 @@ env:
   - TOXENV=lint
 matrix:
   include:
-    - python: 2.7
-      env: TOXENV=py27
-    - python: 2.7
-      env: TOXENV=lint
-    allow_failures:
-    - python: 2.7
-      env: TOXENV=lint
+  - python: 2.7
+    env: TOXENV=py27
+  - python: 2.7
+    env: TOXENV=lint
+  allow_failures:
+  - python: 2.7
+    env: TOXENV=lint
 script:
   - tox -e $TOXENV
 cache: pip
