@@ -8,6 +8,8 @@ env:
   matrix:
   - TOXENV=lint
 matrix:
+  include:
+    env: TOXENV=py27
   allow_failures:
     env: TOXENV=lint
 script:
