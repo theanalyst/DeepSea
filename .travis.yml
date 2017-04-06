@@ -3,15 +3,17 @@ python:
   - 2.7
 install: pip install tox
 env:
-  global:
   - TOXENV=py27
-  matrix:
   - TOXENV=lint
 matrix:
   include:
-    env: TOXENV=py27
-  allow_failures:
-    env: TOXENV=lint
+    - python: 2.7
+      env: TOXENV=py27
+    - python: 2.7
+      env: TOXENV=lint
+    allow_failures:
+    - python: 2.7
+      env: TOXENV=lint
 script:
   - tox -e $TOXENV
 cache: pip
