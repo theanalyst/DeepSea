@@ -6,6 +6,8 @@ matrix:
   include:
   - python: 2.7
     env: TOXENV=py27
+  - python: 2.7
+    env: TOXENV=pylint
   allow_failures:
   - python: 2.7
     env: TOXENV=pylint
