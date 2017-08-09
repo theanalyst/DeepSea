@@ -95,7 +95,7 @@ function rgw_ssl_init {
     mkdir -p $CERTDIR
     pushd $CERTDIR
     openssl req -x509 -nodes -days 1095 -newkey rsa:4096 -keyout rgw.key -out rgw.crt -subj "/C=DE"
-    cat rgw.key > rgw.pem && cat rgw.crt > rgw.pem
+    cat rgw.key > rgw.pem && cat rgw.crt >> rgw.pem
     popd
     rgw_add_ssl_global
 }
