@@ -289,47 +289,6 @@ EOF
   _run_test_script_on_node $TESTSCRIPT $CLIENTNODE
 }
 
-function rgw_curl_test {
-  local TESTSCRIPT=/tmp/rgw_test.sh
-  cat << 'EOF' > $TESTSCRIPT
-set -ex
-trap 'echo "Result: NOT_OK"' ERR
-echo "rgw curl test running as $(whoami) on $(hostname --fqdn)"
-RGWNODE=$(salt --no-color -C "I@roles:rgw" test.ping | grep -o -P '^\S+(?=:)' | head -1)
-zypper --non-interactive --no-gpg-checks refresh
-zypper --non-interactive install --no-recommends curl libxml2-tools
-RGWXMLOUT=/tmp/rgw_test.xml
-curl $RGWNODE > $RGWXMLOUT
-test -f $RGWXMLOUT
-xmllint $RGWXMLOUT
-grep anonymous $RGWXMLOUT
-rm -f $RGWXMLOUT
-echo "Result: OK"
-EOF
-  _run_test_script_on_node $TESTSCRIPT $SALT_MASTER
-}
-
-
-function rgw_curl_test_ssl {
-    local TESTSCRIPT=/tmp/rgw_test.sh
-    cat << 'EOF' > $TESTSCRIPT
-set -ex
-trap 'echo "Result: NOT_OK"' ERR
-echo "rgw curl test running as $(whoami) on $(hostname --fqdn)"
-RGWNODE=$(salt --no-color -C "I@roles:rgw" test.ping | grep -o -P '^\S+(?=:)' | head -1)
-zypper --non-interactive --no-gpg-checks refresh
-zypper --non-interactive install --no-recommends curl libxml2-tools
-RGWXMLOUT=/tmp/rgw_test.xml
-curl -k https://$RGWNODE  > $RGWXMLOUT
-test -f $RGWXMLOUT
-xmllint $RGWXMLOUT
-grep anonymous $RGWXMLOUT
-rm -f $RGWXMLOUT
-echo "Result: OK"
-EOF
-    _run_test_script_on_node $TESTSCRIPT $SALT_MASTER
-}
-
 function iscsi_kludge {
   #
   # apply kludge to work around bsc#1049669
@@ -406,11 +365,4 @@ echo "Result: OK"
 EOF
   # FIXME: assert script not running on the iSCSI gateway node
   _run_test_script_on_node $TESTSCRIPT $CLIENTNODE
-}
-
-function rgw_ssl_init {
-    mv /srv/pillar/ceph/rgw-ssl.sls.example /srv/pillar/ceph/rgw-ssl.sls
-    mkdir -p /srv/salt/ceph/rgw/cert
-    openssl req -x509 -nodes -days 1095 -newkey rsa:4096 -keyout rgw.key -out rgw.crt -subj "/C=DE"
-    cat rgw.key > rgw.pem && cat rgw.crt > rgw.pem
 }
