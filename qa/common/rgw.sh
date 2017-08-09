@@ -96,6 +96,6 @@ function rgw_ssl_init {
     pushd $CERTDIR
     openssl req -x509 -nodes -days 1095 -newkey rsa:4096 -keyout rgw.key -out rgw.crt -subj "/C=DE"
     cat rgw.key > rgw.pem && cat rgw.crt > rgw.pem
-    popd $CERTDIR
+    popd
     rgw_add_ssl_global
 }
