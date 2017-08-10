@@ -23,11 +23,11 @@ source $BASEDIR/common/common.sh
 install_deps
 cat_salt_config
 run_stage_0
+rgw_ssl_init
 run_stage_1
 policy_cfg_base
 policy_cfg_no_client
 policy_cfg_rgw_ssl
-rgw_ssl_init
 cat_policy_cfg
 run_stage_2
 ceph_conf_small_cluster
