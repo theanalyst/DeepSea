@@ -75,6 +75,7 @@ EOF
 function rgw_add_ssl_global {
     local GLOBALYML=/srv/pillar/ceph/stack/global.yml
     cat <<EOF >> $GLOBALYML
+rgw_init: default-ssl
 rgw_configurations:
   rgw:
     users:
